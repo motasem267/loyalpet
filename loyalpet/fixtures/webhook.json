@@ -1,10 +1,11 @@
 [
  {
+  "webhook_secret": "my_secure_secret_123",
   "background_jobs_queue": null,
   "condition": null,
   "docstatus": 0,
   "doctype": "Webhook",
-  "enable_security": 1,
+  "enable_security": 0,
   "enabled": 1,
   "is_dynamic_url": 0,
   "meets_condition": "Yes",
