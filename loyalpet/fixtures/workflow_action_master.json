@@ -1,0 +1,44 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 06:30:01.590317",
+  "name": "تسليم",
+  "workflow_action_name": "تسليم"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 06:30:01.685717",
+  "name": "تعذر التسليم",
+  "workflow_action_name": "تعذر التسليم"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 06:30:01.687827",
+  "name": "إلغاء",
+  "workflow_action_name": "إلغاء"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 06:30:01.690366",
+  "name": "إعادة محاولة",
+  "workflow_action_name": "إعادة محاولة"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 08:04:53.794914",
+  "name": "قبول الدفع",
+  "workflow_action_name": "قبول الدفع"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-07-27 08:04:53.857197",
+  "name": "فشل الدفع",
+  "workflow_action_name": "فشل الدفع"
+ }
+]

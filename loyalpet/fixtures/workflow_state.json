@@ -1,0 +1,56 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.458607",
+  "name": "قيد المراجعة",
+  "style": "",
+  "workflow_state_name": "قيد المراجعة"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.553659",
+  "name": "قيد التوصيل",
+  "style": "",
+  "workflow_state_name": "قيد التوصيل"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.555908",
+  "name": "خطأ في عملية الدفع",
+  "style": "",
+  "workflow_state_name": "خطأ في عملية الدفع"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.559100",
+  "name": "تم الاستلام",
+  "style": "",
+  "workflow_state_name": "تم الاستلام"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.564592",
+  "name": "تعذر الاستلام",
+  "style": "",
+  "workflow_state_name": "تعذر الاستلام"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-07-27 04:49:27.567060",
+  "name": "ملغي",
+  "style": "",
+  "workflow_state_name": "ملغي"
+ }
+]

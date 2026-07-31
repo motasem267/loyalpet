@@ -1,0 +1,87 @@
+{
+ "actions": [],
+ "creation": "2026-06-30 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "code_hash",
+  "amount",
+  "batch_id",
+  "status",
+  "redeemed_by",
+  "redeemed_at",
+  "expires_at"
+ ],
+ "fields": [
+  {
+   "fieldname": "code_hash",
+   "fieldtype": "Data",
+   "label": "Code Hash",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "batch_id",
+   "fieldtype": "Data",
+   "label": "Batch ID"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Available\nRedeemed\nExpired\nDisabled",
+   "default": "Available",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "redeemed_by",
+   "fieldtype": "Link",
+   "label": "Redeemed By",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "redeemed_at",
+   "fieldtype": "Datetime",
+   "label": "Redeemed At"
+  },
+  {
+   "fieldname": "expires_at",
+   "fieldtype": "Datetime",
+   "label": "Expires At",
+   "in_list_view": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-06-30 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "LoyalPet",
+ "name": "Voucher",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "allow_import": 1
+}

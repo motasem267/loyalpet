@@ -1,0 +1,933 @@
+[
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.942544",
+  "name": "LoyalPet Item Sync",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_code",
+    "key": "item_code",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_name",
+    "key": "item_name",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_group",
+    "key": "item_group",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "description",
+    "key": "description",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "image",
+    "key": "image",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "standard_rate",
+    "key": "standard_rate",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "disabled",
+    "key": "disabled",
+    "parent": "LoyalPet Item Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Item",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.941528",
+  "name": "LoyalPet Item Group Sync",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Item Group Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Item Group Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "parent_item_group",
+    "key": "parent_item_group",
+    "parent": "LoyalPet Item Group Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "is_group",
+    "key": "is_group",
+    "parent": "LoyalPet Item Group Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "image",
+    "key": "image",
+    "parent": "LoyalPet Item Group Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Item Group",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.940303",
+  "name": "LoyalPet Product Bundle Sync",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Product Bundle Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Product Bundle Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "new_item_code",
+    "key": "new_item_code",
+    "parent": "LoyalPet Product Bundle Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "description",
+    "key": "description",
+    "parent": "LoyalPet Product Bundle Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_image",
+    "key": "custom_image",
+    "parent": "LoyalPet Product Bundle Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Product Bundle",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.923740",
+  "name": "LoyalPet Hotel Booking Sync (Update)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Hotel Booking Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Hotel Booking Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Hotel Booking Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "status",
+    "key": "status",
+    "parent": "LoyalPet Hotel Booking Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Hotel Booking",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 01:18:25.141812",
+  "name": "LoyalPet Customer Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "erp_customer_id",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer_name",
+    "key": "name",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_phone",
+    "key": "phone",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_address",
+    "key": "address",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_app_user_id",
+    "key": "custom_app_user_id",
+    "parent": "LoyalPet Customer Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Customer",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.943615",
+  "name": "LoyalPet Customer Sync (Update)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Customer Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Customer Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer_name",
+    "key": "customer_name",
+    "parent": "LoyalPet Customer Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_app_user_id",
+    "key": "custom_app_user_id",
+    "parent": "LoyalPet Customer Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Customer",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": "doc.has_value_changed(\"custom_workflow_state\")",
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Select a document to check if it meets conditions.",
+  "modified": "2026-07-27 00:52:35.943081",
+  "name": "LoyalPet Sales Order Sync",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "grand_total",
+    "key": "grand_total",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_workflow_state",
+    "key": "custom_workflow_state",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_payment_method",
+    "key": "custom_payment_method",
+    "parent": "LoyalPet Sales Order Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Sales Order",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.942032",
+  "name": "LoyalPet Item Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_code",
+    "key": "item_code",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_name",
+    "key": "item_name",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "item_group",
+    "key": "item_group",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "description",
+    "key": "description",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "image",
+    "key": "image",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "standard_rate",
+    "key": "standard_rate",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "disabled",
+    "key": "disabled",
+    "parent": "LoyalPet Item Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Item",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.940970",
+  "name": "LoyalPet Item Group Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Item Group Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Item Group Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "parent_item_group",
+    "key": "parent_item_group",
+    "parent": "LoyalPet Item Group Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "is_group",
+    "key": "is_group",
+    "parent": "LoyalPet Item Group Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "image",
+    "key": "image",
+    "parent": "LoyalPet Item Group Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Item Group",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.939606",
+  "name": "LoyalPet Product Bundle Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Product Bundle Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Product Bundle Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "new_item_code",
+    "key": "new_item_code",
+    "parent": "LoyalPet Product Bundle Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "description",
+    "key": "description",
+    "parent": "LoyalPet Product Bundle Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "custom_image",
+    "key": "custom_image",
+    "parent": "LoyalPet Product Bundle Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Product Bundle",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.938336",
+  "name": "LoyalPet Wallet Transaction Sync",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "wallet",
+    "key": "wallet",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "type",
+    "key": "type",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "amount",
+    "key": "amount",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "balance_after",
+    "key": "balance_after",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "source",
+    "key": "source",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "reference",
+    "key": "reference",
+    "parent": "LoyalPet Wallet Transaction Sync",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Wallet Transaction",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.934548",
+  "name": "LoyalPet Vet Appointment Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "status",
+    "key": "status",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "appointment_date",
+    "key": "appointment_date",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "appointment_time",
+    "key": "appointment_time",
+    "parent": "LoyalPet Vet Appointment Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Vet Appointment",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.933939",
+  "name": "LoyalPet Vet Appointment Sync (Update)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "status",
+    "key": "status",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "appointment_date",
+    "key": "appointment_date",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "appointment_time",
+    "key": "appointment_time",
+    "parent": "LoyalPet Vet Appointment Sync (Update)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "on_update",
+  "webhook_doctype": "Vet Appointment",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ },
+ {
+  "background_jobs_queue": null,
+  "condition": null,
+  "docstatus": 0,
+  "doctype": "Webhook",
+  "enable_security": 1,
+  "enabled": 1,
+  "is_dynamic_url": 0,
+  "meets_condition": "Yes",
+  "modified": "2026-07-27 00:52:35.933336",
+  "name": "LoyalPet Hotel Booking Sync (Create)",
+  "preview_document": null,
+  "preview_request_body": "Select a document to preview request data",
+  "request_method": "POST",
+  "request_structure": "",
+  "request_url": "http://172.25.64.1:8001/api/v1/webhooks/erp",
+  "timeout": 15,
+  "webhook_data": [
+   {
+    "fieldname": "doctype",
+    "key": "doctype",
+    "parent": "LoyalPet Hotel Booking Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "name",
+    "key": "name",
+    "parent": "LoyalPet Hotel Booking Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "customer",
+    "key": "customer",
+    "parent": "LoyalPet Hotel Booking Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   },
+   {
+    "fieldname": "status",
+    "key": "status",
+    "parent": "LoyalPet Hotel Booking Sync (Create)",
+    "parentfield": "webhook_data",
+    "parenttype": "Webhook"
+   }
+  ],
+  "webhook_docevent": "after_insert",
+  "webhook_doctype": "Hotel Booking",
+  "webhook_headers": [],
+  "webhook_json": null,
+  "webhook_secret": "************************************************"
+ }
+]

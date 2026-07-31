@@ -1,0 +1,59 @@
+/* LoyalPet Workspace — enhanced shortcut card appearance */
+
+.widget.shortcut-widget-box {
+	padding: var(--padding-lg) var(--padding-xl) !important;
+	border-radius: var(--border-radius-lg);
+	box-shadow: var(--shadow-sm);
+	background: var(--fg-color);
+	border: 1px solid var(--border-color);
+	transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+	min-height: 72px;
+}
+
+.widget.shortcut-widget-box:hover {
+	box-shadow: var(--shadow-md);
+	border-color: var(--primary);
+	transform: translateY(-2px);
+}
+
+.widget.shortcut-widget-box .widget-head {
+	align-items: center;
+}
+
+.widget.shortcut-widget-box .widget-title {
+	font-size: var(--text-lg) !important;
+	font-weight: var(--weight-semibold) !important;
+	letter-spacing: 0.01em;
+}
+
+.widget.shortcut-widget-box .widget-control {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.widget.shortcut-widget-box .indicator-pill {
+	font-size: var(--text-sm);
+	font-weight: var(--weight-medium);
+}
+
+/* Add a colored left accent bar based on workspace */
+[data-page-name="wallets"] .widget.shortcut-widget-box {
+	border-left: 4px solid var(--blue);
+}
+
+[data-page-name="vet"] .widget.shortcut-widget-box {
+	border-left: 4px solid var(--green);
+}
+
+[data-page-name="hotel"] .widget.shortcut-widget-box {
+	border-left: 4px solid var(--orange);
+}
+
+/* Workspace header styling */
+[data-page-name="wallets"] .ce-block h4,
+[data-page-name="vet"] .ce-block h4,
+[data-page-name="hotel"] .ce-block h4 {
+	color: var(--heading-color);
+	margin-bottom: var(--margin-md);
+}

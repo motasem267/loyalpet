@@ -5,6 +5,106 @@ app_description = "loyal pet "
 app_email = "motasemsaklul2001@gmail.com"
 app_license = "mit"
 
+fixtures = [
+	{
+		"dt": "Custom Field",
+		"filters": [["name", "in", [
+			"Sales Order-custom_workflow_state",
+			"Sales Order-custom_from_app",
+			"Sales Order-custom_app_reference",
+			"Sales Order-custom_payment_method",
+			"Sales Order-custom_rejection_reason",
+			"Sales Order-custom_recipient_name",
+			"Sales Order-custom_recipient_phone",
+			"Sales Order-custom_delivery_address",
+			"Sales Order-custom_notes",
+			"Customer-custom_app_user_id",
+			"Customer-custom_phone",
+			"Customer-custom_address",
+			"Item-custom_show_in_app",
+			"Item-custom_is_featured",
+			"Item-custom_featured_order",
+			"Employee-custom_employee_type",
+			"Product Bundle-custom_image",
+		]]],
+	},
+	{
+		"dt": "Workflow State",
+		"filters": [["name", "in", [
+			"قيد المراجعة", "قيد التوصيل", "خطأ في عملية الدفع",
+			"تم الاستلام", "تعذر الاستلام", "ملغي",
+		]]],
+	},
+	{
+		"dt": "Workflow Action Master",
+		"filters": [["name", "in", [
+			"تسليم", "تعذر التسليم", "إلغاء", "إعادة محاولة", "قبول الدفع", "فشل الدفع",
+		]]],
+	},
+	{
+		"dt": "Workflow",
+		"filters": [["name", "=", "Sales Order Workflow"]],
+	},
+	{
+		"dt": "Number Card",
+		"filters": [["name", "in", [
+			"Active Wallets", "Total Wallet Balance", "Available Vouchers",
+			"Today Vet Appointments", "Total Vet Appointments", "Vet Service Types Count",
+			"Total Active Rooms", "Active Hotel Bookings", "Today Hotel Bookings",
+			"Available Rooms Today",
+		]]],
+	},
+	{
+		"dt": "Workspace",
+		"filters": [["name", "in", ["Wallets", "Vet", "Hotel"]]],
+	},
+	{
+		"dt": "Role",
+		"filters": [["name", "=", "Wallet Payment Integration"]],
+	},
+	{
+		"dt": "Webhook",
+		"filters": [["name", "in", [
+			"LoyalPet Customer Sync (Create)", "LoyalPet Customer Sync (Update)",
+			"LoyalPet Sales Order Sync",
+			"LoyalPet Item Sync", "LoyalPet Item Sync (Create)",
+			"LoyalPet Item Group Sync", "LoyalPet Item Group Sync (Create)",
+			"LoyalPet Product Bundle Sync", "LoyalPet Product Bundle Sync (Create)",
+			"LoyalPet Wallet Transaction Sync",
+			"LoyalPet Vet Appointment Sync (Create)", "LoyalPet Vet Appointment Sync (Update)",
+			"LoyalPet Hotel Booking Sync (Create)", "LoyalPet Hotel Booking Sync (Update)",
+		]]],
+	},
+]
+
+override_doctype_class = {
+	"Sales Order": "loyalpet.overrides.sales_order.CustomSalesOrder",
+}
+
+doc_events = {
+	"Customer": {
+		"after_insert": "loyalpet.events.customer.on_customer_created",
+	},
+	"Sales Invoice": {
+		"validate": "loyalpet.events.sales_invoice.validate",
+		"on_submit": "loyalpet.events.sales_invoice.on_submit",
+	},
+	"Wallet Transaction": {
+		"validate": "loyalpet.events.wallet.validate",
+		"on_trash": "loyalpet.events.wallet.on_trash",
+	},
+}
+
+scheduler_events = {
+	"daily": [
+		"loyalpet.tasks.send_appointment_reminders",
+		"loyalpet.tasks.expire_vouchers",
+	],
+	"hourly": [
+		"loyalpet.tasks.check_hotel_checkouts",
+	],
+}
+
 # Apps
 # ------------------
 
@@ -25,8 +125,14 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/loyalpet/css/loyalpet.css"
-# app_include_js = "/assets/loyalpet/js/loyalpet.js"
+app_include_css = "/assets/loyalpet/css/workspace.css"
+app_include_js = "/assets/loyalpet/js/workspace.js"
+
+# include js in doctype views
+doctype_js = {
+	"Sales Order": "public/js/sales_order.js",
+	"Wallet": "public/js/wallet.js",
+}
 
 # include js, css files in header of web template
 # web_include_css = "/assets/loyalpet/css/loyalpet.css"

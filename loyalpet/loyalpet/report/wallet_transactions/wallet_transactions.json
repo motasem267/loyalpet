@@ -1,0 +1,16 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "disabled": 0,
+ "doctype": "Report",
+ "filters": [],
+ "is_standard": "Yes",
+ "module": "LoyalPet",
+ "name": "Wallet Transactions",
+ "ref_doctype": "Wallet Transaction",
+ "report_name": "Wallet Transactions",
+ "report_type": "Script Report",
+ "roles": [
+  {"role": "System Manager"}
+ ]
+}
