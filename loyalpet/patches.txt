@@ -7,3 +7,4 @@
 loyalpet.patches.setup_accounts
 loyalpet.patches.setup_sales_invoice
 loyalpet.patches.setup_wallet_integration
+loyalpet.patches.setup_webhooks

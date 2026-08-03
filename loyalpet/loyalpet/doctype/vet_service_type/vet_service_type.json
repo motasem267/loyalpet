@@ -5,6 +5,7 @@
  "engine": "InnoDB",
  "field_order": [
   "service_name",
+  "item_group",
   "description",
   "price",
   "is_active"
@@ -16,6 +17,14 @@
    "label": "Service Name",
    "reqd": 1,
    "in_list_view": 1
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group",
+   "in_list_view": 1,
+   "in_standard_filter": 1
   },
   {
    "fieldname": "description",

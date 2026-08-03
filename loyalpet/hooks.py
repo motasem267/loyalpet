@@ -62,20 +62,13 @@ fixtures = [
 		"dt": "Role",
 		"filters": [["name", "=", "Wallet Payment Integration"]],
 	},
-	{
-		"dt": "Webhook",
-		"filters": [["name", "in", [
-			"LoyalPet Customer Sync (Create)", "LoyalPet Customer Sync (Update)",
-			"LoyalPet Sales Order Sync",
-			"LoyalPet Item Sync", "LoyalPet Item Sync (Create)",
-			"LoyalPet Item Group Sync", "LoyalPet Item Group Sync (Create)",
-			"LoyalPet Product Bundle Sync", "LoyalPet Product Bundle Sync (Create)",
-			"LoyalPet Wallet Transaction Sync",
-			"LoyalPet Vet Appointment Sync (Create)", "LoyalPet Vet Appointment Sync (Update)",
-			"LoyalPet Hotel Booking Sync (Create)", "LoyalPet Hotel Booking Sync (Update)",
-		]]],
-	},
 ]
+
+# ملاحظة: الـ Webhooks (بما فيهم webhook_secret) عمدًا مش fixtures — لأن
+# webhook_secret حقل Password، بيتصدّر مقنّع (***) في أي fixture، وده يخلي
+# `bench migrate` يفشل (Invalid Webhook Secret) لما يحاول يستوردها.
+# بدل كده بيتعملوا عبر loyalpet.patches.setup_webhooks (idempotent)، والسيكرت
+# والرابط بيتجابوا من site_config.json (loyalpet_webhook_secret / loyalpet_laravel_url).
 
 override_doctype_class = {
 	"Sales Order": "loyalpet.overrides.sales_order.CustomSalesOrder",
@@ -92,6 +85,10 @@ doc_events = {
 	"Wallet Transaction": {
 		"validate": "loyalpet.events.wallet.validate",
 		"on_trash": "loyalpet.events.wallet.on_trash",
+	},
+	"Item Price": {
+		"after_insert": "loyalpet.events.item_price.sync_standard_rate",
+		"on_update": "loyalpet.events.item_price.sync_standard_rate",
 	},
 }
 
