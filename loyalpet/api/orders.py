@@ -2,15 +2,15 @@ import frappe
 from frappe import _
 
 STATE_UNDER_REVIEW = "قيد المراجعة"
-STATE_OUT_FOR_DELIVERY = "قيد التوصيل"
-STATE_PAYMENT_ERROR = "خطأ في عملية الدفع"
+STATE_CANCELLED = "ملغي"
 
 
 @frappe.whitelist()
 def create_sales_order(customer_id, items, payment_method, recipient_name,
 						recipient_phone, delivery_address, notes=None, delivery_date=None):
 	"""
-	إنشاء Sales Order من Laravel
+	إنشاء Sales Order من Laravel — يتسجل "قيد المراجعة" وينتظر موافقة الموظف.
+	الدفع (كاش/محفظة) بيتعالج بعدين وقت الفوترة، مش هنا.
 	POST /api/method/loyalpet.api.orders.create_sales_order
 	"""
 	if not frappe.db.exists("Customer", customer_id):
@@ -36,26 +36,22 @@ def create_sales_order(customer_id, items, payment_method, recipient_name,
 
 	doc.insert(ignore_permissions=True)
 
-	_process_payment(doc)
-
 	return {"name": doc.name, "status": doc.status, "workflow_state": doc.custom_workflow_state}
 
 
-def _process_payment(doc):
-	if doc.custom_payment_method == "cash_on_delivery":
-		doc.custom_workflow_state = STATE_OUT_FOR_DELIVERY
+@frappe.whitelist()
+def reject_sales_order(name):
+	"""
+	رفض طلب لسه "قيد المراجعة" (Draft).
+	محرك الـ Workflow بتاع Frappe مش بيسمح بتعريف انتقال Draft->Cancelled خالص
+	(بيرفض حفظ التعريف نفسه)، فالتحديث هنا بيحصل مباشرة على الداتابيز بدل
+	ما يمر بـ doc.save()/apply_workflow.
+	"""
+	current_state = frappe.db.get_value("Sales Order", name, "custom_workflow_state")
+	if current_state != STATE_UNDER_REVIEW:
+		frappe.throw(_("الطلب مش في حالة قيد المراجعة (الحالة الحالية: {0})").format(current_state))
 
-	elif doc.custom_payment_method == "wallet":
-		# الخصم الفعلي بيحصل وقت الـ Sales Invoice (loyalpet.events.sales_invoice._charge_wallet)
-		# هنا بس نتأكد إن الرصيد كافي عشان نقرر الحالة
-		wallet = frappe.db.get_value("Wallet", {"customer": doc.customer}, ["name", "balance", "is_frozen"], as_dict=True)
-		if not wallet or wallet.is_frozen or wallet.balance < doc.grand_total:
-			doc.custom_workflow_state = STATE_PAYMENT_ERROR
-		else:
-			doc.custom_workflow_state = STATE_OUT_FOR_DELIVERY
+	frappe.db.set_value("Sales Order", name, "custom_workflow_state", STATE_CANCELLED)
+	frappe.db.commit()
 
-	else:
-		frappe.throw(_("طريقة دفع غير معروفة: {0}").format(doc.custom_payment_method))
-
-	# كل الحالات الممكنة هنا (قيد التوصيل / خطأ في عملية الدفع) doc_status=1 في الـ Workflow
-	doc.submit()
+	return {"name": name, "workflow_state": STATE_CANCELLED}

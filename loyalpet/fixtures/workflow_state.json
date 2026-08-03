@@ -52,5 +52,14 @@
   "name": "ملغي",
   "style": "",
   "workflow_state_name": "ملغي"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2026-08-03 23:35:50.485691",
+  "name": "مكتملة",
+  "style": "",
+  "workflow_state_name": "مكتملة"
  }
 ]

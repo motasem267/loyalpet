@@ -30,15 +30,15 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2026-07-27 08:04:53.794914",
-  "name": "قبول الدفع",
-  "workflow_action_name": "قبول الدفع"
+  "modified": "2026-08-03 23:35:50.730051",
+  "name": "موافقة",
+  "workflow_action_name": "موافقة"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2026-07-27 08:04:53.857197",
-  "name": "فشل الدفع",
-  "workflow_action_name": "فشل الدفع"
+  "modified": "2026-08-03 23:35:50.736223",
+  "name": "رفض",
+  "workflow_action_name": "رفض"
  }
 ]
