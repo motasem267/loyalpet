@@ -67,8 +67,10 @@ fixtures = [
 # ملاحظة: الـ Webhooks (بما فيهم webhook_secret) عمدًا مش fixtures — لأن
 # webhook_secret حقل Password، بيتصدّر مقنّع (***) في أي fixture، وده يخلي
 # `bench migrate` يفشل (Invalid Webhook Secret) لما يحاول يستوردها.
-# بدل كده بيتعملوا عبر loyalpet.patches.setup_webhooks (idempotent)، والسيكرت
-# والرابط بيتجابوا من site_config.json (loyalpet_webhook_secret / loyalpet_laravel_url).
+# بدل كده بيتظبطوا بعد كل migrate عبر after_migrate تحت، والسيكرت والرابط
+# بيتجابوا من site_config.json (loyalpet_webhook_secret / loyalpet_backend_url).
+
+after_migrate = ["loyalpet.setup.webhooks.configure_webhooks"]
 
 override_doctype_class = {
 	"Sales Order": "loyalpet.overrides.sales_order.CustomSalesOrder",
