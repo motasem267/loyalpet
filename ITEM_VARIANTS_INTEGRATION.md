@@ -41,6 +41,7 @@ Laravel middleware الخاص بـ LoyalPet. لا يوجد أي API أو DocType
   "image": null,
   "standard_rate": 250.0,
   "disabled": 0,
+  "has_variants": 0,
   "variant_of": "PROT-TEMPLATE",
   "attributes": [
     {"attribute": "الوزن", "attribute_value": "كيلو"},
@@ -55,15 +56,27 @@ Laravel middleware الخاص بـ LoyalPet. لا يوجد أي API أو DocType
 - منتج عادي (مش variant) هيوصله `attributes: []` (مصفوفة فاضية) و
   `variant_of: null` — يعني نفس شكل الـ payload القديم بالظبط، محدش هيتكسر.
 
-**صنف عادي (مش variant)** — نفس الشكل القديم، بس بحقلين إضافيين فاضيين:
+**صنف عادي (مش variant، مش template)** — نفس الشكل القديم، بس بحقول إضافية فاضية/صفرية:
 ```json
 {
   "doctype": "Item", "name": "ITEM-001", "item_code": "ITEM-001",
   "item_name": "...", "item_group": "...", "description": "...",
   "image": "...", "standard_rate": 50.0, "disabled": 0,
-  "variant_of": null, "attributes": []
+  "has_variants": 0, "variant_of": null, "attributes": []
 }
 ```
+
+### `has_variants` — مهم جدًا لمنطق العرض/الطلب
+
+لما `has_variants = 1`، معناه الصنف ده **Template فقط** (زي "أرز" الأساسي) —
+**ERPNext نفسه بيرفض تمامًا** إنه يتباع أو يتحط في Sales Order مباشرة. لازم
+Laravel:
+- **متعرضوش الـ Template كمنتج قابل للطلب** — اعرضوه كـ "بطاقة اختيار" بس
+  (زي "أرز" وتحته أزرار الأحجام)، والطلب الفعلي يبعت كود الـ **variant**
+  المختار، مش كود الـ Template.
+- Template بيوصلكوا بـ `has_variants: 1` و `variant_of: null` دايمًا (هو مش
+  variant لحاجة، هو الأصل).
+- أي صنف تاني (variant أو منتج عادي مالوش variants) بيوصل `has_variants: 0`.
 
 **payload الحذف** (مختصر عمدًا، الغرض بس معرفة إيه اللي اتحذف):
 ```json
