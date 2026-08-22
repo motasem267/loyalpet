@@ -54,4 +54,19 @@ def reject_sales_order(name):
 	frappe.db.set_value("Sales Order", name, "custom_workflow_state", STATE_CANCELLED)
 	frappe.db.commit()
 
+	# التحديث فوق db.set_value مباشر، فمش بيمر بـ doc.save() ومش بيفعّل أي
+	# webhook لوحده — لازم نبلّغ Laravel يدويًا هنا بنفس الشكل اللي بيوصلها
+	# عادةً لما custom_workflow_state يتغيّر.
+	webhook_name = frappe.db.get_value(
+		"Webhook", {"name": "LoyalPet Sales Order Sync", "enabled": 1}, "name"
+	)
+	if webhook_name:
+		doc = frappe.get_doc("Sales Order", name)
+		frappe.enqueue(
+			"frappe.integrations.doctype.webhook.webhook.enqueue_webhook",
+			doc=doc,
+			webhook={"name": webhook_name},
+			queue="default",
+		)
+
 	return {"name": name, "workflow_state": STATE_CANCELLED}
