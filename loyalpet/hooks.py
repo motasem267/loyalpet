@@ -92,6 +92,9 @@ doc_events = {
 		"after_insert": "loyalpet.events.item_price.sync_standard_rate",
 		"on_update": "loyalpet.events.item_price.sync_standard_rate",
 	},
+	"Item": {
+		"on_update": "loyalpet.events.item.cascade_disabled_to_variants",
+	},
 }
 
 scheduler_events = {
