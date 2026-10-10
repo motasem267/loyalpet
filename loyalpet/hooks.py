@@ -139,6 +139,10 @@ doctype_js = {
 	"Wallet": "public/js/wallet.js",
 }
 
+doctype_list_js = {
+	"Item": "public/js/item_list.js",
+}
+
 # include js, css files in header of web template
 # web_include_css = "/assets/loyalpet/css/loyalpet.css"
 # web_include_js = "/assets/loyalpet/js/loyalpet.js"
