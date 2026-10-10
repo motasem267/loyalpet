@@ -8,6 +8,7 @@ Object.assign(frappe.listview_settings["Item"], {
 			listview.filter_area.add([
 				["Item", "standard_rate", "=", "0"],
 				["Item", "has_variants", "=", "0"],
+				["Item", "disabled", "=", "0"],
 			]);
 		});
 	},
