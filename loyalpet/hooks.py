@@ -24,6 +24,8 @@ fixtures = [
 			"Item-custom_show_in_app",
 			"Item-custom_is_featured",
 			"Item-custom_featured_order",
+			"Item-custom_variant_prices_tab",
+			"Item-custom_variant_prices_html",
 			"Employee-custom_employee_type",
 			"Product Bundle-custom_image",
 		]]],
@@ -137,6 +139,7 @@ app_include_js = "/assets/loyalpet/js/workspace.js"
 doctype_js = {
 	"Sales Order": "public/js/sales_order.js",
 	"Wallet": "public/js/wallet.js",
+	"Item": "public/js/item.js",
 }
 
 doctype_list_js = {
