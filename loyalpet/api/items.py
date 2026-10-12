@@ -5,6 +5,49 @@ from frappe import _
 
 
 @frappe.whitelist()
+def get_items(limit_start=0, limit_page_length=500):
+	"""مزامنة كاملة (pull) لكل المنتجات الموجودة في ERPNext — نفس شكل البيانات
+	بالظبط اللي ويب هوكس الإضافة/التعديل بيبعتوها (doctype/name/item_code/
+	item_name/item_group/description/image/standard_rate/disabled/
+	has_variants/variant_of/attributes)، عشان لارافيل يقدر يعمل reconcile
+	كامل (upsert لكل حاجة راجعة هنا) من غير ما يعتمد بس على الويب هوكس.
+	بترجع كل الأصناف (مفعّلة وغير مفعّلة) مع pagination — استمر تنادي بزيادة
+	limit_start لحد ما ترجعلك قائمة فاضية.
+	"""
+	items = frappe.get_all(
+		"Item",
+		fields=[
+			"name", "item_code", "item_name", "item_group", "description", "image",
+			"standard_rate", "disabled", "has_variants", "variant_of",
+		],
+		order_by="item_code asc",
+		limit_start=int(limit_start),
+		limit_page_length=int(limit_page_length),
+	)
+	if not items:
+		return items
+
+	names = [i.name for i in items]
+	attr_rows = frappe.get_all(
+		"Item Variant Attribute",
+		filters={"parent": ["in", names]},
+		fields=["parent", "attribute", "attribute_value"],
+		order_by="idx asc",
+	)
+	attrs_by_item = {}
+	for row in attr_rows:
+		attrs_by_item.setdefault(row.parent, []).append(
+			{"attribute": row.attribute, "attribute_value": row.attribute_value}
+		)
+
+	for i in items:
+		i["doctype"] = "Item"
+		i["attributes"] = attrs_by_item.get(i.name, [])
+
+	return items
+
+
+@frappe.whitelist()
 def get_template_variant_prices(template):
 	"""كل الـ variants بتاعة تمبلت معيّن مع سعر كل واحد وملخص خصائصه
 	(الحجم/النكهة/اللون...)، عشان تتعرض في تاب "أسعار الأصناف"."""
