@@ -28,6 +28,7 @@ fixtures = [
 			"Item-custom_variant_prices_html",
 			"Employee-custom_employee_type",
 			"Product Bundle-custom_image",
+			"Product Bundle-custom_show_in_app",
 		]]],
 	},
 	{
