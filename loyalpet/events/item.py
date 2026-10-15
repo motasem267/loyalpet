@@ -1,6 +1,14 @@
 import frappe
 
+from loyalpet.events.webhook_utils import notify_webhook
+
 TRACKED_PRICE_LIST = "Standard Selling"
+
+
+def notify_rename(doc, method, old_name, new_name, merge=False):
+	"""نفس مشكلة Item Group بالظبط — autoname بتاع Item مبني على item_code
+	(field:)، فتغيير الكود من الديسك rename مش save، ومابيفعّلش on_update."""
+	notify_webhook(doc, "LoyalPet Item Sync")
 
 
 def sync_item_price_from_standard_rate(doc, method):

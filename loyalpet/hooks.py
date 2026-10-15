@@ -100,6 +100,10 @@ doc_events = {
 			"loyalpet.events.item.cascade_disabled_to_variants",
 			"loyalpet.events.item.sync_item_price_from_standard_rate",
 		],
+		"after_rename": "loyalpet.events.item.notify_rename",
+	},
+	"Item Group": {
+		"after_rename": "loyalpet.events.item_group.notify_rename",
 	},
 }
 
