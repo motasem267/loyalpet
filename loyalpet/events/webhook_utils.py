@@ -58,9 +58,17 @@ def _send_signed_payload(url, secret, payload):
 	signature = base64.b64encode(
 		hmac.new(secret.encode("utf8"), body, hashlib.sha256).digest()
 	).decode()
-	requests.post(
-		url,
-		data=body,
-		headers={"Content-Type": "application/json", "X-Frappe-Webhook-Signature": signature},
-		timeout=10,
-	)
+	try:
+		response = requests.post(
+			url,
+			data=body,
+			headers={"Content-Type": "application/json", "X-Frappe-Webhook-Signature": signature},
+			timeout=10,
+		)
+		response.raise_for_status()
+	except Exception:
+		frappe.log_error(
+			f"url: {url}\npayload: {payload}\nresponse: {getattr(locals().get('response'), 'text', None)}\n\n{frappe.get_traceback()}",
+			"LoyalPet Rename Notification Failed",
+		)
+		raise
