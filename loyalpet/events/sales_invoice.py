@@ -1,6 +1,8 @@
 import frappe
 from frappe import _
 
+from loyalpet.events.wallet import has_sufficient_balance
+
 PAYMENT_ACCOUNT_MAP = {
 	"wallet": "E-Wallet - LP",
 	"cash_on_delivery": "Cash - LP",
@@ -96,10 +98,7 @@ def _set_linked_orders_state(doc, state):
 
 
 def _wallet_has_sufficient_balance(doc):
-	wallet = frappe.db.get_value("Wallet", doc.customer, ["balance", "is_frozen"], as_dict=True)
-	if not wallet or wallet.is_frozen:
-		return False
-	return wallet.balance >= doc.grand_total
+	return has_sufficient_balance(doc.customer, doc.grand_total)
 
 
 def _charge_wallet(doc):

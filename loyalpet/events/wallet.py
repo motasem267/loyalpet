@@ -7,6 +7,15 @@ class InsufficientWalletBalance(frappe.ValidationError):
 	pass
 
 
+def has_sufficient_balance(customer, amount):
+	"""فحص مبدئي للرصيد (من غير خصم) — مستخدم وقت إنشاء/تعديل الطلب ووقت الفوترة.
+	الخصم الفعلي محمي ذرّيًا في validate تحت."""
+	wallet = frappe.db.get_value("Wallet", customer, ["balance", "is_frozen"], as_dict=True)
+	if not wallet or wallet.is_frozen:
+		return False
+	return flt(wallet.balance) >= flt(amount)
+
+
 def validate(doc, method):
 	if not doc.is_new():
 		frappe.throw(_("Wallet Transactions are immutable and cannot be modified."))
