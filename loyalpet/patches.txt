@@ -10,3 +10,4 @@ loyalpet.patches.setup_wallet_integration
 loyalpet.patches.setup_display_settings
 loyalpet.patches.setup_item_quick_entry
 loyalpet.patches.setup_item_price_editable
+loyalpet.patches.setup_card_transfer_payment_modes

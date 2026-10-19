@@ -21,24 +21,37 @@ frappe.ui.form.on("Sales Order", {
 			}, __("Create"));
 		}
 
-		// طلب لسه "قيد المراجعة" (Draft) — محرك الـ Workflow مايسمحش بانتقال
-		// Draft->Cancelled عادي، فبنعرض زرار مباشر بيستخدم reject_sales_order
-		if (frm.doc.custom_workflow_state === "قيد المراجعة" && frm.doc.docstatus === 0) {
+		// طلب لسه "قيد المراجعة" أو "بانتظار تأكيد الحوالة" (Draft) — محرك الـ Workflow
+		// مايسمحش بانتقال Draft->Cancelled عادي، فبنعرض زرار مباشر بيستخدم reject_sales_order
+		const awaiting_transfer = frm.doc.custom_workflow_state === "بانتظار تأكيد الحوالة";
+		if ((frm.doc.custom_workflow_state === "قيد المراجعة" || awaiting_transfer) && frm.doc.docstatus === 0) {
 			frm.add_custom_button(__("رفض الطلب"), () => {
-				frappe.confirm(__("متأكد إنك عايز ترفض/تلغي الطلب ده؟"), () => {
-					frappe.call({
-						method: "loyalpet.api.orders.reject_sales_order",
-						args: { name: frm.doc.name },
-						freeze: true,
-						freeze_message: __("جاري الإلغاء..."),
-						callback(r) {
-							if (r.message) {
-								frappe.show_alert({ message: __("تم إلغاء الطلب"), indicator: "red" });
-								frm.reload_doc();
-							}
-						},
-					});
-				});
+				frappe.prompt(
+					{
+						fieldname: "reason",
+						fieldtype: "Small Text",
+						label: __("سبب الرفض (يظهر للزبون)"),
+						reqd: awaiting_transfer ? 1 : 0,
+					},
+					({ reason }) => {
+						frappe.call({
+							method: "loyalpet.api.orders.reject_sales_order",
+							args: { name: frm.doc.name, reason },
+							freeze: true,
+							freeze_message: __("جاري الإلغاء..."),
+							callback(r) {
+								if (r.message) {
+									frappe.show_alert({ message: __("تم إلغاء الطلب"), indicator: "red" });
+									frm.reload_doc();
+								}
+							},
+						});
+					},
+					frm.doc.custom_transfer_payment_entry
+						? __("الحوالة متأكدة ومسجلة — لازم ترجيع الفلوس يدويًا بعد الرفض")
+						: __("رفض الطلب"),
+					__("رفض"),
+				);
 			}).addClass("btn-danger");
 		}
 	},

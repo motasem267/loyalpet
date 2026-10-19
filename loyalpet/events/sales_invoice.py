@@ -1,15 +1,63 @@
 import frappe
 from frappe import _
+from frappe.utils import flt
 
 from loyalpet.events.wallet import has_sufficient_balance
 
-PAYMENT_ACCOUNT_MAP = {
-	"wallet": "E-Wallet - LP",
-	"cash_on_delivery": "Cash - LP",
+# طريقة الدفع على الطلب -> Mode of Payment، والحساب يتجاب من إعداد طريقة الدفع
+# نفسها باش الحسابات تفرّق بين النقدي والبطاقة والحوالة.
+PAYMENT_MODE_MAP = {
+	"wallet": "E-Wallet",
+	"cash_on_delivery": "Cash",
+	"card_on_delivery": "بطاقة",
+	"bank_transfer": "حوالة",
 }
 
 STATE_COMPLETED = "مكتملة"
 STATE_PAYMENT_ERROR = "خطأ في عملية الدفع"
+
+
+def before_validate(doc, method):
+	_allocate_transfer_advances(doc)
+
+
+def _allocate_transfer_advances(doc):
+	"""فلوس الحوالة اتسجلت دفعة مقدمة وقت تأكيدها (loyalpet.overrides.sales_order).
+	هني تتخصم من الفاتورة، قبل validate عشان ERPNext يحسب outstanding_amount
+	على أساسها. بنختار بس الدفعة المربوطة بالطلب نفسه، مش أي دفعة مقدمة
+	تانية على الزبون (ممكن تكون متاعة طلب ثاني)."""
+	if doc.is_return or doc.docstatus == 2 or not doc.debit_to:
+		return
+
+	orders = {item.sales_order for item in doc.items if item.sales_order}
+	payment_entries = {
+		pe for pe in (
+			frappe.db.get_value("Sales Order", so, "custom_transfer_payment_entry") for so in orders
+		) if pe
+	}
+	if not payment_entries:
+		return
+
+	other_rows = [r for r in doc.get("advances") if r.reference_name not in payment_entries]
+	doc.set("advances", other_rows)
+
+	remaining = (doc.get("rounded_total") or doc.grand_total) - sum(flt(r.allocated_amount) for r in other_rows)
+	for entry in doc.get_advance_entries():
+		if entry.reference_type != "Payment Entry" or entry.reference_name not in payment_entries:
+			continue
+		allocated = min(remaining, flt(entry.amount))
+		remaining -= allocated
+		doc.append("advances", {
+			"reference_type": entry.reference_type,
+			"reference_name": entry.reference_name,
+			"reference_row": entry.reference_row,
+			"remarks": entry.remarks,
+			"advance_amount": flt(entry.amount),
+			"allocated_amount": allocated,
+			"ref_exchange_rate": flt(entry.exchange_rate),
+			"difference_posting_date": doc.posting_date,
+			"account": entry.get("paid_from"),
+		})
 
 
 def validate(doc, method):
@@ -65,17 +113,21 @@ def _check_one_invoice_per_order(doc):
 
 
 def on_submit(doc, method):
-	if doc.outstanding_amount <= 0:
+	if doc.is_return:
 		return
 
-	payment_method = _get_payment_method(doc)
+	# لو outstanding صفر (زي الحوالة المخصومة كدفعة مقدمة) الفاتورة خالصة
+	# وما فيش دفع جديد يتسجل، بس الطلب برضه يكمل.
+	if doc.outstanding_amount > 0:
+		payment_method = _get_payment_method(doc)
 
-	if payment_method == "wallet":
-		# الرصيد اتأكد منه فعلًا في validate() — هنا الخصم الحقيقي، ومحمي كمان
-		# ذرّيًا (row lock) جوه loyalpet.events.wallet لو حصل تغيّر لحظي في الرصيد
-		_charge_wallet(doc)
+		if payment_method == "wallet":
+			# الرصيد اتأكد منه فعلًا في validate() — هنا الخصم الحقيقي، ومحمي كمان
+			# ذرّيًا (row lock) جوه loyalpet.events.wallet لو حصل تغيّر لحظي في الرصيد
+			_charge_wallet(doc)
 
-	_create_payment_entry(doc, payment_method)
+		_create_payment_entry(doc, payment_method)
+
 	_set_linked_orders_state(doc, STATE_COMPLETED)
 
 
@@ -124,10 +176,12 @@ def _charge_wallet(doc):
 
 def _create_payment_entry(doc, payment_method):
 	from erpnext.accounts.doctype.payment_entry.payment_entry import get_payment_entry
+	from erpnext.accounts.doctype.sales_invoice.sales_invoice import get_bank_cash_account
 
-	paid_to = PAYMENT_ACCOUNT_MAP.get(payment_method, "Cash - LP")
+	mode_of_payment = PAYMENT_MODE_MAP.get(payment_method, "Cash")
 	pe = get_payment_entry("Sales Invoice", doc.name, party_amount=doc.outstanding_amount)
-	pe.paid_to = paid_to
+	pe.mode_of_payment = mode_of_payment
+	pe.paid_to = get_bank_cash_account(mode_of_payment, doc.company)["account"]
 	pe.reference_no = doc.name
 	pe.reference_date = doc.posting_date
 	pe.remarks = f"Auto-payment for {doc.name} via {payment_method}"

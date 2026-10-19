@@ -18,6 +18,8 @@ fixtures = [
 			"Sales Order-custom_recipient_phone",
 			"Sales Order-custom_delivery_address",
 			"Sales Order-custom_notes",
+			"Sales Order-custom_transfer_receipt",
+			"Sales Order-custom_transfer_payment_entry",
 			"Customer-custom_app_user_id",
 			"Customer-custom_phone",
 			"Customer-custom_address",
@@ -35,13 +37,13 @@ fixtures = [
 		"dt": "Workflow State",
 		"filters": [["name", "in", [
 			"قيد المراجعة", "قيد التوصيل", "خطأ في عملية الدفع",
-			"مكتملة", "تم الاستلام", "تعذر الاستلام", "ملغي",
+			"مكتملة", "تم الاستلام", "تعذر الاستلام", "ملغي", "بانتظار تأكيد الحوالة",
 		]]],
 	},
 	{
 		"dt": "Workflow Action Master",
 		"filters": [["name", "in", [
-			"موافقة", "رفض", "تسليم", "تعذر التسليم", "إلغاء", "إعادة محاولة",
+			"موافقة", "رفض", "تسليم", "تعذر التسليم", "إلغاء", "إعادة محاولة", "تأكيد الحوالة",
 		]]],
 	},
 	{
@@ -84,6 +86,7 @@ doc_events = {
 		"after_insert": "loyalpet.events.customer.on_customer_created",
 	},
 	"Sales Invoice": {
+		"before_validate": "loyalpet.events.sales_invoice.before_validate",
 		"validate": "loyalpet.events.sales_invoice.validate",
 		"on_submit": "loyalpet.events.sales_invoice.on_submit",
 	},
@@ -149,6 +152,7 @@ doctype_js = {
 
 doctype_list_js = {
 	"Item": "public/js/item_list.js",
+	"Sales Order": "public/js/sales_order_list.js",
 }
 
 # include js, css files in header of web template
