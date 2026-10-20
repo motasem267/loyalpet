@@ -148,6 +148,7 @@ doctype_js = {
 	"Sales Order": "public/js/sales_order.js",
 	"Wallet": "public/js/wallet.js",
 	"Item": "public/js/item.js",
+	"App Notification": "public/js/app_notification.js",
 }
 
 doctype_list_js = {

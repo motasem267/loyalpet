@@ -6,6 +6,12 @@ import json
 import frappe
 
 
+def sign_payload(secret, body_bytes):
+	"""بتوقّع أي payload بنفس طريقة Frappe الداخلية (HMAC-SHA256 + base64)،
+	عشان أي كود تاني يبعت طلب موقّع للارافيل بدون ما يمر بنظام Webhook الجاهز."""
+	return base64.b64encode(hmac.new(secret.encode("utf8"), body_bytes, hashlib.sha256).digest()).decode()
+
+
 def notify_webhook(doc, webhook_name):
 	"""بتفعّل ويب هوك معيّن يدويًا — للحالات اللي بتغيّر المستند من غير ما تمر
 	بـ doc.save() العادي (زي rename_doc، أو تحديث مباشر على الداتابيز)،
@@ -55,9 +61,7 @@ def _send_signed_payload(url, secret, payload):
 	import requests
 
 	body = json.dumps(payload).encode("utf8")
-	signature = base64.b64encode(
-		hmac.new(secret.encode("utf8"), body, hashlib.sha256).digest()
-	).decode()
+	signature = sign_payload(secret, body)
 	try:
 		response = requests.post(
 			url,
