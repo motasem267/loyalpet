@@ -9,7 +9,7 @@ frappe.ui.form.on("App Notification", {
 
 		frm.add_custom_button(__("إرسال"), () => {
 			frappe.confirm(
-				__("متأكد إنك عايز تبعت الإشعار ده؟ بعد الإرسال مش هينفع تعدله."),
+				__("هل تريد إرسال الإشعار؟ لا يمكن تعديله بعد الإرسال."),
 				() => {
 					frappe.call({
 						method: "loyalpet.api.notifications.send_app_notification",
