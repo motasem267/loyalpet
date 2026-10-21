@@ -11,6 +11,28 @@ def notify_rename(doc, method, old_name, new_name, merge=False):
 	بنبعت الاسمين عشان لارافيل يعمل rename حقيقي مش إضافة سجل جديد."""
 	send_rename_notification("Item", old_name, new_name)
 
+	if doc.has_variants:
+		cascade_rename_to_variants(new_name, old_name, new_name)
+
+
+def cascade_rename_to_variants(template_name, old_template_name, new_template_name):
+	"""تغيير اسم التمبلت بيحدّث variant_of على كل الـ variants تلقائي (Frappe
+	بيعمل كده لوحده لأي Link field)، لكن مابيغيرش كود الـ variant نفسه. لو
+	كوده بادئ بكود التمبلت القديم (الاتفاقية المتبعة في الكتالوج)، بنغيّر
+	الكود بنفس الطريقة — وكل rename فرعي ده بيفعّل notify_rename بتاعته
+	لوحده، فلارافيل بياخد إشعار منفصل لكل variant اتغير كوده."""
+	prefix = old_template_name + "-"
+	variants = frappe.get_all("Item", filters={"variant_of": template_name}, pluck="name")
+	for variant_name in variants:
+		if not variant_name.startswith(prefix):
+			continue
+		new_variant_name = new_template_name + variant_name[len(old_template_name):]
+		if new_variant_name == variant_name or frappe.db.exists("Item", new_variant_name):
+			continue
+		from frappe.model.rename_doc import rename_doc
+
+		rename_doc(doctype="Item", old=variant_name, new=new_variant_name, ignore_permissions=True)
+
 
 def sync_item_price_from_standard_rate(doc, method):
 	"""لما الموظف يكتب "Standard Selling Rate" في نفس صفحة/نافذة إضافة المنتج،
