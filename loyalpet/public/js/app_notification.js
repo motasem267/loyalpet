@@ -1,15 +1,18 @@
+const LOCKED_AFTER_SEND_FIELDS = ["send_to", "customers"];
+
 frappe.ui.form.on("App Notification", {
 	refresh(frm) {
-		if (frm.doc.status && frm.doc.status !== "مسودة") {
-			frm.disable_form();
-			return;
-		}
+		const already_sent = frm.doc.status && frm.doc.status !== "مسودة";
 
-		if (frm.is_new()) return;
+		// بعد الإرسال: مين استلم يفضل مقفول، لكن المحتوى (العنوان/النص/
+		// الصورة/الإجراء) يفضل قابل للتعديل ويتبعت تحديثه للارافيل تلقائي
+		LOCKED_AFTER_SEND_FIELDS.forEach((f) => frm.set_df_property(f, "read_only", already_sent ? 1 : 0));
+
+		if (frm.is_new() || already_sent) return;
 
 		frm.add_custom_button(__("إرسال"), () => {
 			frappe.confirm(
-				__("هل تريد إرسال الإشعار؟ لا يمكن تعديله بعد الإرسال."),
+				__("هل تريد إرسال الإشعار؟ لن يمكن إرساله مرة أخرى بعد ذلك."),
 				() => {
 					frappe.call({
 						method: "loyalpet.api.notifications.send_app_notification",

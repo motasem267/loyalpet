@@ -108,6 +108,10 @@ doc_events = {
 	"Item Group": {
 		"after_rename": "loyalpet.events.item_group.notify_rename",
 	},
+	"App Notification": {
+		"on_update": "loyalpet.events.app_notification.notify_content_update",
+		"on_trash": "loyalpet.events.app_notification.notify_deleted",
+	},
 }
 
 scheduler_events = {
